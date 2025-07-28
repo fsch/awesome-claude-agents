@@ -1,0 +1,123 @@
+# Microsoft Cloud Agents
+
+This directory contains specialized Claude Code agents for Microsoft 365 and Azure development, administration, and integration scenarios.
+
+## Available Agents
+
+### 🏢 [M365 Development Agent](./m365-development.md)
+Specializes in Microsoft 365 development including:
+- Microsoft Graph API integration
+- SharePoint Framework (SPFx) development
+- Teams app development
+- Power Platform integration
+- Exchange Online operations
+
+**Use when:** Building applications that integrate with M365 services, creating Teams apps, developing SharePoint solutions, or working with the Microsoft Graph.
+
+### ☁️ [Azure Cloud Development Agent](./azure-cloud-development.md)
+Expert in Azure cloud services including:
+- Infrastructure as Code (ARM/Bicep)
+- Azure Functions and App Services
+- Storage and database services
+- Networking and security
+- DevOps pipelines and monitoring
+
+**Use when:** Deploying Azure infrastructure, building cloud-native applications, implementing CI/CD pipelines, or working with Azure PaaS services.
+
+### 🔗 [M365 Azure Hybrid Agent](./m365-azure-hybrid.md)
+Specializes in integration scenarios between M365 and Azure:
+- Identity and access management across platforms
+- Hybrid automation workflows
+- Cross-platform data integration
+- Unified security and compliance
+
+**Use when:** Building solutions that span both M365 and Azure, implementing SSO, creating automated workflows between platforms, or designing unified architectures.
+
+### 👨‍💼 [M365 Admin Agent](./m365-admin.md)
+Expert in M365 administration and PowerShell automation:
+- Tenant management and configuration
+- User lifecycle and license management
+- Security and compliance configuration
+- PowerShell automation scripts
+- Monitoring and reporting
+
+**Use when:** Managing M365 tenants, automating administrative tasks, implementing security policies, or generating compliance reports.
+
+## Usage Examples
+
+### Basic Usage
+```bash
+# For M365 development tasks
+claude "Use m365-development to create a Teams app with Graph API integration"
+
+# For Azure infrastructure
+claude "Use azure-cloud-development to deploy a web app with Bicep"
+
+# For hybrid scenarios
+claude "Use m365-azure-hybrid to sync SharePoint files to Azure Blob Storage"
+
+# For admin tasks
+claude "Use m365-admin to create a PowerShell script for bulk user creation"
+```
+
+### Complex Scenarios
+```bash
+# Multi-agent collaboration
+claude "Use tech-lead-orchestrator with m365-development and azure-cloud-development to build a document processing system that extracts data from SharePoint, processes it with Azure Functions, and stores results in Cosmos DB"
+
+# End-to-end implementation
+claude "Use m365-azure-hybrid to implement SSO across our M365 tenant and Azure applications with proper security policies"
+```
+
+## Integration with Other Agents
+
+These agents work seamlessly with the existing agent ecosystem:
+
+- **With Tech Lead Orchestrator**: For complex Microsoft cloud projects
+- **With API Architect**: For designing Graph API or Azure REST API integrations  
+- **With Security Expert**: For implementing Zero Trust architectures
+- **With Performance Optimizer**: For optimizing Azure costs and M365 performance
+
+## Prerequisites
+
+- **M365 Development**: Node.js, TypeScript, M365 CLI, Teams Toolkit
+- **Azure Development**: Azure CLI, Bicep/ARM tools, Azure SDK
+- **PowerShell**: PowerShell 7+, Azure PowerShell, Microsoft Graph PowerShell
+- **Authentication**: Proper Azure AD app registrations and permissions
+
+## Common Patterns
+
+### Authentication Flow
+```javascript
+// Shared pattern across all Microsoft agents
+const { ClientSecretCredential } = require("@azure/identity");
+const { Client } = require("@microsoft/microsoft-graph-client");
+
+const credential = new ClientSecretCredential(
+    tenantId,
+    clientId, 
+    clientSecret
+);
+
+const graphClient = Client.initWithMiddleware({
+    authProvider: new TokenCredentialAuthenticationProvider(credential, {
+        scopes: ["https://graph.microsoft.com/.default"]
+    })
+});
+```
+
+### Error Handling
+All agents implement consistent error handling for:
+- Authentication failures
+- API throttling
+- Permission errors
+- Service unavailability
+
+## Contributing
+
+When adding new Microsoft cloud agents:
+1. Follow the existing agent format
+2. Include practical code examples
+3. Cover common error scenarios
+4. Provide PowerShell alternatives where applicable
+5. Test with real Microsoft cloud environments
